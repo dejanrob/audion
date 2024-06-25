@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // api: 'http://localhost:3000'
+  api: 'https://us-central1-audiocapture-e5d87.cloudfunctions.net/ocrImage'
 };
 
 /*

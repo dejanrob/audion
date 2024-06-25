@@ -1,20 +1,73 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div *ngIf="!cameraScreen" class="capture-button-container">
+  <button (click)="takePicture()" class="swal2-confirm swal2-outline swal2-styled"><i class="fa fa-camera fa-3x d-block pb-2"></i>Capture To Speech</button>
+  <button (click)="cameraScreen=!cameraScreen" class="swal2-confirm swal2-styled"><i class="fa fa-file-text fa-3x d-block pb-2"></i>Text To Speech</button>
+</div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<div *ngIf="cameraScreen" class="text-center pt-4 overflow-auto" class="preview-screen">
+  <div class="w-100">
+    <textarea class="container py-4 px-3" [(ngModel)]="finalText" placeholder="Type content here..." (ngModelChange)="detectModelChange()"></textarea>
   </div>
-</ion-content>
+  <!-- <img [src]="previewSrc" alt=""> -->
+  <section class="controls">
+    <div class="py-2 px-4 my-2">
+      <ion-select placeholder="Choose interpreter" interface="action-sheet" (ionChange)="handleInterpreterChange($event)" mode="md" style="text-align: center">
+        <ion-select-option *ngFor="let item of interpreterSelectOptions" [value]="item.value">{{ item.text }}</ion-select-option>
+      </ion-select>
+    </div>
+    <div class="actions">
+      <button (click)="clear()" class="swal2-cancel swal2-styled"><i class="fa fa-eraser"></i> Clear</button>
+      <button (click)="processText()" class="swal2-confirm swal2-styled"><i class="fa fa-paper-plane"></i> Process</button>
+    </div>
+  </section>
+</div>
+
+<!-- Player -->
+<div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;" *ngIf="player.visibility">
+  <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: grid;">
+    <h2 class="swal2-title" id="swal2-title" style="display: block;">{{ player.status }}</h2>
+    <div class="swal2-actions" style="display: flex;">
+      <div class="swal2-loader"></div>
+      <button type="button" class="swal2-confirm swal2-styled" aria-label="Stop" style="display: inline-block;" (click)="soundToggle()">
+        <i [class]="player.playButton"></i>
+      </button>
+      <button type="button" class="swal2-confirm swal2-styled" aria-label="Rewind" style="display: inline-block;" (click)="soundBackward()">
+        <i class="fa fa-backward"></i>
+      </button>
+      <button type="button" class="swal2-confirm swal2-styled" aria-label="Forward" style="display: inline-block;" (click)="soundForward()">
+        <i class="fa fa-forward"></i>
+      </button>
+      <button type="button" class="swal2-confirm swal2-styled" aria-label="Pause" style="display: inline-block;" (click)="soundStop()">
+        <i [class]="player.stopButton"></i>
+      </button>
+    </div>
+    <div class="swal2-timer-progress-bar-container">
+      <div class="swal2-timer-progress-bar" style="display: flex; transition: width 0s linear 0s;" [style.width]="progressBarPercent"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+  <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: grid;">
+    <div class="swal2-actions" style="display: flex;">
+      <div class="swal2-loader"></div>
+      <button type="button" class="swal2-confirm swal2-styled" aria-label="Play" style="display: inline-block;">
+        <i class="fa fa-play"></i> Play </button>
+      <button type="button" class="swal2-deny swal2-styled" aria-label="Download" style="display: inline-block;">
+        <i class="fa fa-download"> Download</i>
+      </button>
+      <button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: none;">Cancel</button>
+    </div>
+    <div class="swal2-timer-progress-bar-container">
+      <div class="swal2-timer-progress-bar" style="display: flex; transition: width 7s linear 0s; width: 60%;"></div>
+    </div>
+  </div>
+</div> -->

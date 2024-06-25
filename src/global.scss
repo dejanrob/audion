@@ -1,13 +1,13 @@
 /*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
+* App Global CSS
+* ----------------------------------------------------------------------------
+* Put style rules here that you want to apply globally. These styles are for
+* the entire app and not just one component. Additionally, this file can be
+* used as an entry point to import other CSS/Sass files to be included in the
+* output CSS.
+* For more information on global stylesheets, visit the documentation:
+* https://ionicframework.com/docs/layout/global-stylesheets
+*/
 
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
@@ -24,3 +24,50 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+$back-color: #4DB5A1;
+$placeholder-color: rgba(255,255,255,.5);
+$content-color: #fff;
+$confirm-button-color: #2E9E88;
+$cancel-button-color: #7CD2C1;
+
+html, body, textarea, ion-select {
+    // background-color: #fff !important;
+    background-color: $back-color !important;
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $placeholder-color;
+    }
+    color: $content-color;
+}
+
+button {
+    padding: 1rem 1.7rem !important;
+    border-radius: 0 !important;
+}
+
+.default-alert {
+    --border-radius: 0 !important;
+}
+
+.swal2 {
+    &-confirm {
+        background-color: $confirm-button-color !important;
+    }
+    &-deny {
+        background-color: $confirm-button-color !important;
+    }
+    &-cancel {
+        background-color: $cancel-button-color !important;
+    }
+
+    &-title {
+        color: $content-color !important;
+    }
+
+    &-popup {
+        border-radius: 0 !important;
+        background-color: $back-color !important;
+    }
+
+
+}
